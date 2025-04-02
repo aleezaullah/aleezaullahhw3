@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!--
+   Program Name:patient-form.html
+   Author: Aleeza Wajeehullah
+   Date created: 3/17/25
+   Date last edited: 3/17/25
+   Version: 1.0
+   Description: Homework 3 HTML
+-->
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="hw3.css">
+
+
+   <!-- displays text in browser's tab-->
+   <title>New Patient Registration | Clear Health</title>
+</head>
+<body>
+ <header>
+     <table width="100%">
+     <tr>
+         <td valign="top" align="left" width="20%">
+             <div class="image">
+               <img align="center" src="clearhealth.png" alt="Inset name of your Logo" width="80px" id="logo"/>
+             </div>
+           </td>
+
+
+           <td>
+             <h2>Clear Health</h2>
+           </td>
+
+
+           <td valign="bottom" align="right" width="20%">
+           Today's Date: <span id="today"></span>
+           </td>
+       </tr>
+       </table>
+     </header>
+<hr>
+
+
+<!--form will start from here here-->
+<form name="signup" id="signup" action="thankyou.html">
+   <center>
+       <div class="format">
+           <table>
+             <tr>
+                 <th colspan="4">Create Account</th>
+             </tr>
+
+
+<!--below is patient information portion of form-->
+<!-- first name html section-->
+         <tr>
+            <td><label for="fname">First Name:</label></td>
+             <td>
+             <input
+             type="text"
+             name="fname"
+             id="fname"
+             minlength="1"
+             maxlength="30"
+             required
+             pattern="[a-zA-Z'-]{1,30}"
+             onblur="validateFname()"
+             title="Letter, apostrophes, and dashes only"
+             placeholder="Aleeza"
+             />
+        <span class="error" id="fname-error"></span>
+       </td>
+     </tr>
+
+
+     <!-- middle name html section-->
+     <tr>
+       <td><label for="minitial">Middle Name:</label></td>
+       <td>
+           <input
+           type="text"
+           name="minitial"
+           id="minitial"
+           maxlength="1"
+           title="Letters only"
+           pattern="[a-zA-Z']{0,1}"
+           onblur="validateMinitial()"
+           placeholder="S"
+           />
+
+
+           <span class="error" id="minitial-error"></span>
+           </td>
+       </tr>
+
+
+       <!-- last name html section-->
+       <tr>
+       <td><label for="lname">Last Name:</label></td>
+       <td>
+       <input
+       type="text"
+       name="lname"
+       id="lname"
+       minlength="1"
+       maxlength="30"
+       required
+       title="Letters, apostrophes, and dashes only"
+       pattern="[a-zA-Z'-]{1,30}"
+       onblur="validateLname()"
+       placeholder="Wajeehullah"
+       />
+       <!-- pattern to INCLUDE numbers 2-5 pattern="[a-zA-Z'2-5-]{1,30}"-->
+
+
+       <span class="error" id="lname-error"></span>
+       </td>
+   </tr>
+
+
+   <!-- gender html section-->
+   <tr>
+       <td><label for="pgender">Gender:</label></td>
+       <td>
+           <input
+           type="radio"
+           id="g1"
+           name="pgender"
+           value="Male"
+           />
+           Male
+
+
+           <input
+           type="radio"
+           id="g2"
+           name="pgender"
+           value="Female"
+           />
+           Female
+
+
+           <input
+           type="radio"
+           id="g3"
+           name="pgender"
+           value="Other"
+           />
+           Other
+       </td>
+     </tr>
+
+
+     <!-- date of birth (dob) html section-->
+     <tr>
+       <td><label for="dob">Date of Birth:</label></td>
+       <td>
+           <input
+           type="date"
+           id="dob"
+           name="dob"
+           onblur="validateDob()"
+           required
+           />
+           <span class="error" id="dob-error"></span>
+       </td>
+   </tr>   
+
+
+   <!-- social security (ssn) html section-->
+   <tr>
+       <td><label for="socialsec">Social Security:</label></td>
+       <td>
+           <input
+           type="password"
+           minlength="9"
+           maxlength="9"
+           name="ssn"
+           id="ssn"
+           required
+           title="Numbers only"
+           placeholder="XXX-XX-XXXX"
+           onblur="validateSsn()"
+           />
+
+
+       <span class="error" id="ssn-error"></span>
+       </td>
+   </tr>
+
+
+
+
+   <!-- address one 1 html section-->
+   <tr>
+       <td><label for="address1">Address Line 1:</label></td>
+       <td>
+       <input
+       type="text"
+       name="address1"
+       id="address1"
+       minlength="2"
+       maxlength="30"
+       required
+       title="Please enter your address"
+       placeholder="1111 Beverly Hills Drive"
+       onblur="validateAddress1()"
+       />
+       <!-- validate address code from misso hw help-->
+
+
+     <span class="error" id="address1-error"></span>
+     </td>
+ </tr>
+
+
+ <!-- address 2 two html section-->
+ <tr>
+     <td><label for="address2">Address Line 2:</label></td>
+     <td>
+         <input
+         type="text"
+         name="address2"
+         id="address2"
+         minlength="2"
+         maxlength="30"
+         title="Please enter your address"
+         placeholder="Apt 2"
+         />
+         <!-- no validation needed for hw3 yet-->
+       </td>
+     </tr>
+
+
+     <!-- city html section-->
+     </tr>
+         <td><label for="city">City:</label></td>
+         <td>
+             <input
+             type="text"
+             name="city"
+             id="city"
+             minlength="2"
+             maxlength="30"
+             required
+             placeholder="Houston"
+             onblur="validateCity()"
+             >
+       <span class="error" id="city-error"></span>
+       </td>
+   </tr>
+
+
+   <!-- state html section-->
+   <tr>
+       <td><label for="state">State:</label></td>
+       <td>
+         <select id="state" name="state" required>
+           <option selected disabled>Please Select One</option>
+           <option value="AL">Alabama</option>
+           <option value="AK">Alaska</option>
+           <option value="AZ">Arizona</option>
+           <option value="AR">Arkansas</option>
+           <option value="CA">California</option>
+           <option value="CO">Colorado</option>
+           <option value="CT">Connecticut</option>
+           <option value="DE">Delaware</option>
+           <option value="DC">District Of Columbia</option>
+           <option value="FL">Florida</option>
+           <option value="GA">Georgia</option>
+           <option value="HI">Hawaii</option>
+           <option value="ID">Idaho</option>
+           <option value="IL">Illinois</option>
+           <option value="IN">Indiana</option>
+           <option value="IA">Iowa</option>
+           <option value="KS">Kansas</option>
+           <option value="KY">Kentucky</option>
+           <option value="LA">Louisiana</option>
+           <option value="ME">Maine</option>
+           <option value="MD">Maryland</option>
+           <option value="MA">Massachusetts</option>
+           <option value="MI">Michigan</option>
+           <option value="MN">Minnesota</option>
+           <option value="MS">Mississippi</option>
+           <option value="MO">Missouri</option>
+           <option value="MT">Montana</option>
+           <option value="NE">Nebraska</option>
+           <option value="NV">Nevada</option>
+           <option value="NH">New Hampshire</option>
+           <option value="NJ">New Jersey</option>
+           <option value="NM">New Mexico</option>
+           <option value="NY">New York</option>
+           <option value="NC">North Carolina</option>
+           <option value="ND">North Dakota</option>
+           <option value="OH">Ohio</option>
+           <option value="OK">Oklahoma</option>
+           <option value="OR">Oregon</option>
+           <option value="PA">Pennsylvania</option>
+           <option value="RI">Rhode Island</option>
+           <option value="SC">South Carolina</option>
+           <option value="SD">South Dakota</option>
+           <option value="TN">Tennessee</option>
+           <option value="TX">Texas</option>
+           <option value="UT">Utah</option>
+           <option value="VT">Vermont</option>
+           <option value="VA">Virginia</option>
+           <option value="WA">Washington</option>
+           <option value="WV">West Virginia</option>
+           <option value="WI">Wisconsin</option>
+           <option value="WY">Wyoming</option>
+<!-- Code snippet from https://gist.github.com/pusherman/3145761 -->
+       </select>
+       </td>
+     </tr>
+
+
+
+
+     <!-- zip code html section-->
+     <tr>
+     <td><label for="zip">Zip Code:</label></td>
+     <td>
+         <input
+         type="text"
+         name="zcode"
+         id="zcode"
+         minlength="5"
+         maxlength="10"
+         required
+         title="Numbers and a dash only"
+         placeholder="12345"
+         pattern="[0-9]{5}"
+         onblur="validateZcode()"
+         />
+     <span class="error" id="zcode-error"></span>
+     </td>
+ </tr>
+
+
+
+
+ <!-- email html section-->
+ <tr>
+     <td><label for="email">Email Address:</label></td>
+     <td>
+         <input
+         type="text"
+         name="email"
+         id="email"
+         maxlength="30"
+         required placeholder="myemail@gmail.com"
+         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+         onblur="validateEmail()"
+         />
+
+
+         <span class="error" id="email-error"></span> 
+       </td>
+     </tr>
+
+
+     <!-- phone number html section-->
+     <tr>
+       <td><label for="pnum">Phone Number:</label></td>
+       <td>
+           <input
+           type="text"
+           name="pnum"
+           id="pnum"
+           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+           maxlength="12"
+           required
+           title="Numbers Only"
+           placeholder="000-000-0000"
+           onblur="validatePnum()"
+           />
+           <span class="error" id="pnum-error"></span>
+       </td>
+   </tr>
+  
+
+
+   <!-- radio buttons symptoms html section-->
+   <tr>
+       <td><label for="history">Reason for Visit:</label></td>
+       <td>
+           <input type="checkbox" id="option1" value="Sick"> Sick
+           <input type="checkbox" id="option2" value="Checkup"> Check Up
+           <input type="checkbox" id="option3" value="Vaccination"> Vaccination
+           <input type="checkbox" id="option4" value="Bloodwork"> Bloodwork
+           <input type="checkbox" id="option5" value="Other"> Other
+       </td>
+     </tr>
+
+
+     <!-- current symptoms html section-->
+     <tr>
+         <td><label for="notes1">Current Symptoms:</label></td>
+     </td>
+     <td>
+         <textarea
+         id="notes1"
+         name="notes1"
+         rows="5"
+         cols="80"
+         placeholder="Enter any symptoms or concerns here..."
+         ></textarea>
+         <span id="description_text"></span>
+       </td>
+   </tr>
+
+
+   <!-- radio button symptom questions-->
+   <tr>
+       <td><label for="fluvac">Had the Flu Vaccine this year?:</label></td>
+       <td>
+           <input
+           type="radio"
+           id="p1"
+           name="fluvac"
+           value="Yes1"
+           />
+           Yes
+
+
+           <input
+           type="radio"
+           id="p2"
+           name="fluvac"
+           value="No1"
+           />
+           No
+       </td>
+     </tr>
+
+
+     <tr>
+         <td><label for="insure">Do you have insurance?:</label></td>
+         <td>
+             <input
+             type="radio"
+             id="p1"
+             name="insure"
+             value="Yes2"
+             />
+             Yes
+
+
+             <input
+             type="radio"
+             id="p2"
+             name="insure"
+             value="No2"
+             />
+             No
+         </td>
+       </tr>
+
+
+       <!-- additional notes html section-->
+       </tr>
+           <td><label for="notes">Additional Notes:</label></td>
+           <td>
+               <textarea
+               id="notes"
+               name="notes"
+               maxlength="500"
+               title="Please enter additional notes"
+               rows="5"
+               cols="80"
+               placeholder="Enter any additional medical history, insurance or medical concerns here..."
+               ></textarea>
+               <span id="description_text"></span>
+           </td>
+         </tr>
+
+
+
+
+     <!--range slider current health-->
+<tr>
+   <td><label for="range">Current state of health?<br/>(Rate from 1 to 10)</label></td>
+   <td>
+       <input
+       type="range"
+       name="range"
+       id="range"
+       min="1"
+       max="10"
+       value="0"
+       />
+       <span id="range-slider"></span>
+     </td>
+   </tr>
+
+
+    <!--username user id html section-->
+   <tr>
+       <td><label for="uid">User ID:</label></td>
+       <td>
+           <input
+           type="text"
+           name="uid"
+           id="uid"
+           minlength="5"
+           maxlength="30"
+           required
+           title="Username must contain at least 5 characters and cannot start with a number"
+           title="Please enter a user ID:"
+           placeholder="Clear21"onblur="validateUid()"
+           />
+
+
+           <span class="error" id="uid-error"></span>
+           </td>
+        </tr>
+
+
+        <!-- password html section-->
+        <tr>
+           <td><label for="pass">Password:</label></td>
+           <td>
+               <input
+               type="password"
+               name="pass"
+               id="pass"
+               minlength="10"
+               maxlength="30"
+               required
+               title="Password must contain at least 10 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+               placeholder="Required"
+               onblur="validatePass()"
+               oninput="validatePass()"
+               onfocus="validatePass()"
+               />
+               <span class="error" id="pass-error"></span>
+           </td>
+       </tr>
+      
+
+
+       <!--confirm password section of html-->
+       <tr>
+           <td><label for="pass_con">Confirm Password:</label></td>
+           <td>
+               <input
+               type="password"
+               name="pass_con"
+               id="pass_con"
+               minlength="10"
+               maxlength="30"
+               required
+               title="Please re-enter your password here"
+               placeholder="Required"
+               onblur="confirmPassword()"
+               oninput="confirmPassword()"
+               onfocus="confirmPassword()"
+               />
+               <span class="error" id="pass2-error"></span>
+           </td>
+       </tr>
+      
+
+
+   <!--the code below is used from misso hw help--> 
+   <!--validate is not required for hw3 but i am adding it now by using help from misso-->
+  
+   <!-- submit/clear/review buttons html section-->
+   <tr>
+         <td colspan="4">
+             <center>
+               <input type="Submit" name="Submit" id="Submit" style="font-family:'Times New Roman', 'Times New Roman', Times, serif, monospace">
+               &nbsp;&nbsp;&nbsp;
+               <input type="Reset" value="Clear and Start Over" style="font-family:'Times New Roman', 'Times New Roman', Times, serif, monospace">
+               &nbsp;&nbsp;&nbsp;
+               <input type="Button" name="Review" id="Review" value="Review" onclick="reviewInput()" style="font-family:'Times New Roman', 'Times New Roman', Times, serif, monospace">
+               &nbsp;&nbsp;&nbsp;
+               <!--New validate button used for hw3-->
+               <input type="Button" name="Validate" id="Validate" value="Validate" onclick="validateInput()" style="font-family:'Times New Roman', 'Times New Roman', Times, serif, monospace">
+           </center>
+         </td>
+       </tr>
+   </table>
+ </div>
+ </div>
+<div class="pass-message">
+   <span id="msg1"></span>
+   <span id="msg2"></span>
+   <span id="msg3"></span>
+   <span id="msg4"></span>
+   <span id="msg5"></span>
+   <span id="msg6"></span>
+   <span id="msg7"></span>
+   <span id="pass2-error"></span>
+</div>
+<!-- show information from review button html section-->
+   <center>
+       <p id="showInput"></p>
+   </center>
+   </div>
+ </center>
+ <!-- above is code used from misso hw help -->
+</form>
+<footer>
+<p>&#169; Clear Health <a href="contact.html">Contact Us!</a></p>
+</footer>
+<script src="hw3.js"></script>
+</form>
+<!--Below will add an alert box to the form-->
+<div id="alert-box">
+    <div id="alert-content">
+        <h4>Please Fill Out All Required Fields.</h4>
+        <button id="close-alert">OK</button>
+    </div>
+</div>
+   </body>
+</html>
+<!-- END OF CODE FOR HTML -->
